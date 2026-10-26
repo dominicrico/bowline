@@ -1,0 +1,9 @@
+{
+  "name": "@bowline/example-billing",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@bowline/server": "workspace:*"
+  }
+}
