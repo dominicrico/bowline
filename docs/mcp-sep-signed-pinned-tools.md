@@ -12,7 +12,7 @@ A client approves a set of tool definitions once, then lets a model use them for
 
 The Tools page already warns that clients must treat annotations as untrusted unless they come from trusted servers. It gives clients no way to establish trust, and no way to notice that a definition changed.
 
-We ran a four-attack scenario against the official TypeScript SDK 1.32.1 (`scripts/scenario-tamper.ts`, result `bench/results/tamper-2026-10-26T11-19-57.361Z.json`). After approval, `send_invoice`-style tools gained an injected instruction, and a destructive tool was downgraded to read-only. In all four attacks the changed definition reached the model:
+We ran a four-attack scenario against the official TypeScript SDK 1.32.1 (`scripts/scenario-tamper.ts`, result `bench/results/tamper-2026-10-26T11-19-57.361Z.json`). After approval, the description of an email-sending tool gained an injected instruction, and a destructive tool was downgraded to read-only. In all four attacks the changed definition reached the model:
 
 1. The server changes definitions and sends `list_changed`.
 2. The server changes definitions with no notification.

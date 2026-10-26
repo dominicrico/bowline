@@ -4,7 +4,7 @@ Oct 22, 2026 · Rico
 
 ## Status, abstract and motivation
 
-Bowline is a thin agent layer over HTTP, OpenAPI 3.1 and OAuth 2.1 that lets models use remote capabilities with near-zero idle context cost, explicit contracts and mandatory remote security. Status: strawman draft v0.1 for discussion, not implemented.
+Bowline is a thin agent layer over HTTP, OpenAPI 3.1 and OAuth 2.1 that lets models use remote capabilities with near-zero idle context cost, explicit contracts and mandatory remote security. Status: strawman draft v0.1 for discussion. A TypeScript reference implementation and a benchmark exist (see `docs/benchmark-protocol.md`). On 2026-10-26 the strategy changed: the core ideas go to MCP as enhancement proposals instead of shipping Bowline as a standalone protocol. See the decision at the end of this document.
 
 Bowline fixes five gaps observed in today's agent-to-tool integrations:
 
@@ -505,13 +505,15 @@ The biggest open decision is strategic, not technical: ship Bowline as a standal
 
 **Open questions**
 
-- [ ] Standalone protocol or MCP profile? Upstreaming avoids an ecosystem split; standalone moves faster and keeps mandatory security non-negotiable.
+- [x] Standalone protocol or MCP profile? **Decided 2026-10-26: upstream to MCP.** See the decision below.
 - [ ] Is BSig worth a new syntax, or should clients render compact signatures from JSON Schema themselves?
 - [ ] CIBA requires authorization server support that many identity providers lack. Is a fallback (approval link in the client UI, signed by the client) acceptable?
 - [ ] Should effect classes be enforced by the server only, or also attested by the client in the DPoP proof?
 - [ ] How do sampling-style features (server asks the client's model a question) fit, if at all?
 - [ ] Who governs the spec: a neutral foundation from day one, or a small working group until v1.0?
-      **Roadmap**
+      **Decision, 2026-10-26: upstream, do not ship standalone.** Measured on a synthetic billing catalog with `claude-opus-5-5`: Bowline's idle context cost is 6x (25 capabilities) to 12x (100) below eager MCP, but deferred MCP tool search matches or beats it at idle and on all ten tasks, and Bowline scored 7 to 10 points lower on first-call selection (G4 failed in two runs). Descriptor pinning with re-consent stopped all four tampering attacks that reached the model unchanged under the official MCP SDK, but a client can do the same without a protocol change. What only the protocol can add is publisher-signed tool lists, which are not built or tested. The first proposal is `docs/mcp-sep-signed-pinned-tools.md`. Limits: one author wrote the catalog and the prompts, one model was tested, and the auth, delegation and step-up ideas were not measured. The reference implementation and bridges stay as the prototype behind the proposals.
+
+**Roadmap**
 
 1. **v0.1 strawman (this draft).** Collect review from API, identity and agent-runtime engineers.
 2. **v0.2 reference implementations.** TypeScript and Python server and client SDKs, OpenAPI generator, Bowline-to-MCP bridge. Gate: one real API (internal) served end to end, idle context cost measured against its MCP equivalent.

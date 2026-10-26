@@ -2,7 +2,7 @@
 
 Bowline is a draft protocol for connecting AI agents to remote capabilities, designed as a better-engineered alternative to MCP for agent-to-tool access. The full draft lives in `SPEC.md`. Read it before designing or changing anything protocol-related; treat this repo's `SPEC.md` as the single source of truth from now on.
 
-Status: v0.1 strawman, nothing implemented yet. "Bowline" replaced the earlier working name "Keel" on 2026-10-26 after collision checks (npm, PyPI, GitHub, web: no AI-protocol conflicts found). Trademark and domain checks are still open. Use `@bowline/*` for npm and `bowline-protocol` for the GitHub org.
+Status: v0.1 strawman with a TypeScript reference implementation (discovery server, client with pinning, MCP bridge) and benchmarks under `bench/`. "Bowline" replaced the earlier working name "Keel" on 2026-10-26 after collision checks (npm, PyPI, GitHub, web: no AI-protocol conflicts found). Trademark and domain checks are still open. Use `@bowline/*` for npm and `bowline-protocol` for the GitHub org.
 
 ## How this started
 
@@ -24,7 +24,11 @@ The idea came from a critical review of the article "MCP Is Dead" (Lucas McGrego
 8. Scope: agent-to-capability only. Agent-to-agent stays with A2A.
 9. Adoption first: bridges (Bowline to MCP, MCP to Bowline, OpenAPI to Bowline) are core, not optional.
 
-## Current focus: roadmap step v0.2
+## Decision (2026-10-26): upstream to MCP, not standalone
+
+Gate results: G1, G2 and G3 passed, G4 failed (see `docs/benchmark-protocol.md` changelog). Deferred MCP tool search removes most of the context-cost advantage, and the tampering scenario shows client-side pinning closes most of the security gap. Next steps: discuss the first proposal (`docs/mcp-sep-signed-pinned-tools.md`) in an MCP working group before any pull request, build a TypeScript SDK prototype, and test publisher-signed manifests. Core design decision 8 and the adoption goal in decision 9 stand. Decisions 1 to 7 are now the content of proposals, not of a standalone spec. Do not submit anything to MCP without the owner's approval.
+
+## Earlier focus: roadmap step v0.2 (done)
 
 Build the TypeScript reference implementation first:
 
