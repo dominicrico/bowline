@@ -15,7 +15,7 @@ Hi all. I'd like to discuss a gap in how clients handle `tools/list` after the u
 
 **What the prototype shows.** `@bowline/mcp-pinning` runs against the unmodified SDK. With it on, all four attacks are stopped. An honest publisher loses no tools, which I checked with a control run. The prototype has no SDK dependency and works on the objects `listTools()` returns.
 
-**Things we found while building it.**
+**Things I found while building it.**
 1. The SDK's `ToolSchema` drops unknown top-level fields on the client. The prototype carries the digest in `_meta` and the signature in the result's `_meta`. A real SEP would need to use `_meta` or extend the schema. I'd like the group's view on which.
 2. Signing does not stop a publisher who ships a bad update with its own key. Only pinning does. Signing protects against intermediaries and lets users trust a publisher key. I think the proposal should say this plainly.
 
