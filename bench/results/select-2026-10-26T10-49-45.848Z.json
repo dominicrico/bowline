@@ -1,0 +1,1826 @@
+{
+  "catalog": "C1",
+  "capabilities": 25,
+  "model": "claude-opus-5-5",
+  "date": "2026-10-26T10:49:45.848Z",
+  "accuracy": {
+    "B1": {
+      "correct": 46,
+      "of": 60,
+      "pct": 76.66666666666667
+    },
+    "M1": {
+      "correct": 52,
+      "of": 60,
+      "pct": 86.66666666666667
+    },
+    "M2": {
+      "correct": 49,
+      "of": 60,
+      "pct": 81.66666666666667
+    }
+  },
+  "G4": false,
+  "rows": [
+    {
+      "arm": "B1",
+      "i": 0,
+      "expect": "customers.get",
+      "prompt": "Show me the record for customer cus_4821.",
+      "picked": "customers.get",
+      "correct": true,
+      "turns": 2,
+      "inputTokens": 1615
+    },
+    {
+      "arm": "B1",
+      "i": 1,
+      "expect": "customers.get",
+      "prompt": "What's the open balance for cus_1033?",
+      "picked": "customers.get",
+      "correct": true,
+      "turns": 2,
+      "inputTokens": 1652
+    },
+    {
+      "arm": "B1",
+      "i": 2,
+      "expect": "customers.get",
+      "prompt": "Pull up everything we have on customer cus_77.",
+      "picked": "customers.get",
+      "correct": true,
+      "turns": 2,
+      "inputTokens": 3176
+    },
+    {
+      "arm": "B1",
+      "i": 3,
+      "expect": "customers.find",
+      "prompt": "Which customer has the billing email accounts@atelier-nord.example?",
+      "picked": "customers.find",
+      "correct": true,
+      "turns": 2,
+      "inputTokens": 1631
+    },
+    {
+      "arm": "B1",
+      "i": 4,
+      "expect": "customers.find",
+      "prompt": "Do we have a customer called Nordlicht GmbH? I don't have the id.",
+      "picked": "customers.find",
+      "correct": true,
+      "turns": 2,
+      "inputTokens": 1639
+    },
+    {
+      "arm": "B1",
+      "i": 5,
+      "expect": "customers.find",
+      "prompt": "Look up the customer whose name contains Atelier.",
+      "picked": "customers.find",
+      "correct": true,
+      "turns": 2,
+      "inputTokens": 1619
+    },
+    {
+      "arm": "B1",
+      "i": 6,
+      "expect": "customers.create",
+      "prompt": "Add a new customer: Brandt & Söhne, billing at ap@brandt.example, invoicing in CHF.",
+      "picked": "customers.find",
+      "correct": false,
+      "turns": 2,
+      "inputTokens": 1663
+    },
+    {
+      "arm": "B1",
+      "i": 7,
+      "expect": "customers.create",
+      "prompt": "We just signed Kelvin Labs (finance@kelvin.example). Set them up in the system.",
+      "picked": "customers.find",
+      "correct": false,
+      "turns": 2,
+      "inputTokens": 1679
+    },
+    {
+      "arm": "B1",
+      "i": 8,
+      "expect": "customers.update",
+      "prompt": "Customer cus_4821 moved, their new billing email is ap@atelier-nord.example.",
+      "picked": "customers.update",
+      "correct": true,
+      "turns": 2,
+      "inputTokens": 1647
+    },
+    {
+      "arm": "B1",
+      "i": 9,
+      "expect": "customers.update",
+      "prompt": "Rename customer cus_309 to Helvetia Trading AG.",
+      "picked": "customers.update",
+      "correct": true,
+      "turns": 2,
+      "inputTokens": 1631
+    },
+    {
+      "arm": "B1",
+      "i": 10,
+      "expect": "customers.delete",
+      "prompt": "Customer cus_55 asked for erasure and has no open invoices. Delete the record.",
+      "picked": "customers.get",
+      "correct": false,
+      "turns": 2,
+      "inputTokens": 1698
+    },
+    {
+      "arm": "B1",
+      "i": 11,
+      "expect": "customers.delete",
+      "prompt": "Remove duplicate customer cus_812 permanently; it has nothing open.",
+      "picked": "customers.get",
+      "correct": false,
+      "turns": 2,
+      "inputTokens": 1699
+    },
+    {
+      "arm": "B1",
+      "i": 12,
+      "expect": "invoices.create",
+      "prompt": "Draft an invoice for cus_4821: 3 hours consulting at 120 EUR.",
+      "picked": "invoices.create",
+      "correct": true,
+      "turns": 2,
+      "inputTokens": 1801
+    },
+    {
+      "arm": "B1",
+      "i": 13,
+      "expect": "invoices.create",
+      "prompt": "Bill customer cus_1033 for 10 licences at 49 USD each, due 2026-11-30.",
+      "picked": "invoices.create",
+      "correct": true,
+      "turns": 2,
+      "inputTokens": 1823
+    },
+    {
+      "arm": "B1",
+      "i": 14,
+      "expect": "invoices.get",
+      "prompt": "What is the status of invoice inv_204?",
+      "picked": "invoices.get",
+      "correct": true,
+      "turns": 2,
+      "inputTokens": 1767
+    },
+    {
+      "arm": "B1",
+      "i": 15,
+      "expect": "invoices.get",
+      "prompt": "Show me the lines on invoice inv_311.",
+      "picked": "invoices.get",
+      "correct": true,
+      "turns": 2,
+      "inputTokens": 1771
+    },
+    {
+      "arm": "B1",
+      "i": 16,
+      "expect": "invoices.get",
+      "prompt": "Is inv_98 paid yet?",
+      "picked": "invoices.get",
+      "correct": true,
+      "turns": 2,
+      "inputTokens": 1765
+    },
+    {
+      "arm": "B1",
+      "i": 17,
+      "expect": "invoices.list",
+      "prompt": "List all open invoices for customer cus_4821.",
+      "picked": "invoices.list",
+      "correct": true,
+      "turns": 2,
+      "inputTokens": 1771
+    },
+    {
+      "arm": "B1",
+      "i": 18,
+      "expect": "invoices.list",
+      "prompt": "Show me every draft invoice we have.",
+      "picked": "invoices.list",
+      "correct": true,
+      "turns": 2,
+      "inputTokens": 1765
+    },
+    {
+      "arm": "B1",
+      "i": 19,
+      "expect": "invoices.list",
+      "prompt": "Which invoices have been voided so far?",
+      "picked": "invoices.list",
+      "correct": true,
+      "turns": 2,
+      "inputTokens": 1780
+    },
+    {
+      "arm": "B1",
+      "i": 20,
+      "expect": "invoices.send",
+      "prompt": "Invoice inv_204 is finalized. Email it to the customer.",
+      "picked": "invoices.send",
+      "correct": true,
+      "turns": 2,
+      "inputTokens": 1785
+    },
+    {
+      "arm": "B1",
+      "i": 21,
+      "expect": "invoices.send",
+      "prompt": "Send inv_311 to the client with a note saying thanks for the quick turnaround.",
+      "picked": "invoices.get",
+      "correct": false,
+      "turns": 2,
+      "inputTokens": 1795
+    },
+    {
+      "arm": "B1",
+      "i": 22,
+      "expect": "invoices.void",
+      "prompt": "Invoice inv_98 was issued by mistake and is unpaid. Void it.",
+      "picked": "invoices.get",
+      "correct": false,
+      "turns": 2,
+      "inputTokens": 1795
+    },
+    {
+      "arm": "B1",
+      "i": 23,
+      "expect": "invoices.void",
+      "prompt": "Cancel invoice inv_150, it's a duplicate and nobody paid it.",
+      "picked": "invoices.get",
+      "correct": false,
+      "turns": 2,
+      "inputTokens": 1814
+    },
+    {
+      "arm": "B1",
+      "i": 24,
+      "expect": "invoices.void",
+      "prompt": "Void invoice inv_77; it was raised against the wrong customer and is unpaid.",
+      "picked": "invoices.get",
+      "correct": false,
+      "turns": 2,
+      "inputTokens": 1797
+    },
+    {
+      "arm": "B1",
+      "i": 25,
+      "expect": "payments.record",
+      "prompt": "We received a bank transfer of 360 EUR yesterday for invoice inv_204. Record it.",
+      "picked": "invoices.get",
+      "correct": false,
+      "turns": 2,
+      "inputTokens": 2261
+    },
+    {
+      "arm": "B1",
+      "i": 26,
+      "expect": "payments.record",
+      "prompt": "Mark 1,200 USD as received against inv_311 today.",
+      "picked": "payments.record",
+      "correct": true,
+      "turns": 2,
+      "inputTokens": 1657
+    },
+    {
+      "arm": "B1",
+      "i": 27,
+      "expect": "payments.get",
+      "prompt": "What are the details of payment pay_77?",
+      "picked": "payments.get",
+      "correct": true,
+      "turns": 2,
+      "inputTokens": 1627
+    },
+    {
+      "arm": "B1",
+      "i": 28,
+      "expect": "payments.get",
+      "prompt": "When was pay_410 received and for how much?",
+      "picked": "payments.get",
+      "correct": true,
+      "turns": 2,
+      "inputTokens": 1629
+    },
+    {
+      "arm": "B1",
+      "i": 29,
+      "expect": "payments.list",
+      "prompt": "Show all payments recorded against invoice inv_204.",
+      "picked": "payments.list",
+      "correct": true,
+      "turns": 2,
+      "inputTokens": 1637
+    },
+    {
+      "arm": "B1",
+      "i": 30,
+      "expect": "payments.list",
+      "prompt": "List the latest payments we've received.",
+      "picked": "payments.list",
+      "correct": true,
+      "turns": 2,
+      "inputTokens": 1623
+    },
+    {
+      "arm": "B1",
+      "i": 31,
+      "expect": "payments.list",
+      "prompt": "Has anything been paid on inv_98? Show the payments.",
+      "picked": "payments.list",
+      "correct": true,
+      "turns": 2,
+      "inputTokens": 1641
+    },
+    {
+      "arm": "B1",
+      "i": 32,
+      "expect": "payments.refund",
+      "prompt": "Refund payment pay_77 in full to the customer.",
+      "picked": "payments.get",
+      "correct": false,
+      "turns": 2,
+      "inputTokens": 1637
+    },
+    {
+      "arm": "B1",
+      "i": 33,
+      "expect": "payments.refund",
+      "prompt": "Give back 50 EUR from payment pay_410.",
+      "picked": "payments.get",
+      "correct": false,
+      "turns": 2,
+      "inputTokens": 1637
+    },
+    {
+      "arm": "B1",
+      "i": 34,
+      "expect": "payments.refund",
+      "prompt": "The client was double charged on payment pay_512. Refund it.",
+      "picked": "payments.get",
+      "correct": false,
+      "turns": 2,
+      "inputTokens": 1641
+    },
+    {
+      "arm": "B1",
+      "i": 35,
+      "expect": "payments.reconcile",
+      "prompt": "Bank transaction btx_9021 matches payment pay_77. Link them.",
+      "picked": "payments.reconcile",
+      "correct": true,
+      "turns": 2,
+      "inputTokens": 1668
+    },
+    {
+      "arm": "B1",
+      "i": 36,
+      "expect": "payments.reconcile",
+      "prompt": "Reconcile pay_410 with bank transaction btx_9100.",
+      "picked": "payments.reconcile",
+      "correct": true,
+      "turns": 2,
+      "inputTokens": 1665
+    },
+    {
+      "arm": "B1",
+      "i": 37,
+      "expect": "subscriptions.create",
+      "prompt": "Start customer cus_4821 on the Pro plan beginning 2026-11-01.",
+      "picked": "subscriptions.create",
+      "correct": true,
+      "turns": 2,
+      "inputTokens": 1697
+    },
+    {
+      "arm": "B1",
+      "i": 38,
+      "expect": "subscriptions.create",
+      "prompt": "Sign up cus_1033 for the Basic plan.",
+      "picked": "subscriptions.create",
+      "correct": true,
+      "turns": 2,
+      "inputTokens": 1677
+    },
+    {
+      "arm": "B1",
+      "i": 39,
+      "expect": "subscriptions.get",
+      "prompt": "What plan is subscription sub_19 on and when does it renew?",
+      "picked": "subscriptions.get",
+      "correct": true,
+      "turns": 2,
+      "inputTokens": 1681
+    },
+    {
+      "arm": "B1",
+      "i": 40,
+      "expect": "subscriptions.get",
+      "prompt": "Is sub_42 still active?",
+      "picked": "subscriptions.get",
+      "correct": true,
+      "turns": 2,
+      "inputTokens": 1661
+    },
+    {
+      "arm": "B1",
+      "i": 41,
+      "expect": "subscriptions.get",
+      "prompt": "Show me subscription sub_61.",
+      "picked": "subscriptions.get",
+      "correct": true,
+      "turns": 2,
+      "inputTokens": 1663
+    },
+    {
+      "arm": "B1",
+      "i": 42,
+      "expect": "subscriptions.changePlan",
+      "prompt": "Upgrade sub_19 to the Enterprise plan.",
+      "picked": "subscriptions.get",
+      "correct": false,
+      "turns": 2,
+      "inputTokens": 1681
+    },
+    {
+      "arm": "B1",
+      "i": 43,
+      "expect": "subscriptions.changePlan",
+      "prompt": "Customer wants to downgrade sub_42 to Basic, switch it.",
+      "picked": "subscriptions.changePlan",
+      "correct": true,
+      "turns": 2,
+      "inputTokens": 1689
+    },
+    {
+      "arm": "B1",
+      "i": 44,
+      "expect": "subscriptions.pause",
+      "prompt": "Pause sub_19 until 2027-01-15, the customer is on leave.",
+      "picked": "subscriptions.pause",
+      "correct": true,
+      "turns": 2,
+      "inputTokens": 1691
+    },
+    {
+      "arm": "B1",
+      "i": 45,
+      "expect": "subscriptions.pause",
+      "prompt": "Put subscription sub_42 on hold for now, we'll resume later.",
+      "picked": "subscriptions.pause",
+      "correct": true,
+      "turns": 2,
+      "inputTokens": 1687
+    },
+    {
+      "arm": "B1",
+      "i": 46,
+      "expect": "subscriptions.cancel",
+      "prompt": "Cancel subscription sub_19 at the end of the period.",
+      "picked": "subscriptions.cancel",
+      "correct": true,
+      "turns": 2,
+      "inputTokens": 1679
+    },
+    {
+      "arm": "B1",
+      "i": 47,
+      "expect": "subscriptions.cancel",
+      "prompt": "Customer cus_55 is leaving. End sub_61 for good.",
+      "picked": "subscriptions.get",
+      "correct": false,
+      "turns": 2,
+      "inputTokens": 1704
+    },
+    {
+      "arm": "B1",
+      "i": 48,
+      "expect": "reports.revenue",
+      "prompt": "How much revenue did we book between 2026-07-01 and 2026-09-30?",
+      "picked": "reports.revenue",
+      "correct": true,
+      "turns": 2,
+      "inputTokens": 1608
+    },
+    {
+      "arm": "B1",
+      "i": 49,
+      "expect": "reports.revenue",
+      "prompt": "Run a revenue report for October 2026.",
+      "picked": "reports.revenue",
+      "correct": true,
+      "turns": 2,
+      "inputTokens": 1582
+    },
+    {
+      "arm": "B1",
+      "i": 50,
+      "expect": "reports.aging",
+      "prompt": "Which customers are overdue? I need an aging report as of today.",
+      "picked": "reports.aging",
+      "correct": true,
+      "turns": 2,
+      "inputTokens": 1607
+    },
+    {
+      "arm": "B1",
+      "i": 51,
+      "expect": "reports.aging",
+      "prompt": "Give me the AR aging as of 2026-09-30.",
+      "picked": "reports.aging",
+      "correct": true,
+      "turns": 2,
+      "inputTokens": 1592
+    },
+    {
+      "arm": "B1",
+      "i": 52,
+      "expect": "reports.taxSummary",
+      "prompt": "I need the VAT summary for Q3 2026.",
+      "picked": "reports.taxSummary",
+      "correct": true,
+      "turns": 2,
+      "inputTokens": 1605
+    },
+    {
+      "arm": "B1",
+      "i": 53,
+      "expect": "reports.taxSummary",
+      "prompt": "Prepare the tax summary for the first quarter of 2026.",
+      "picked": "reports.taxSummary",
+      "correct": true,
+      "turns": 2,
+      "inputTokens": 1612
+    },
+    {
+      "arm": "B1",
+      "i": 54,
+      "expect": "reports.get",
+      "prompt": "Report rep_330 should be done by now. Fetch it.",
+      "picked": "reports.get",
+      "correct": true,
+      "turns": 2,
+      "inputTokens": 1594
+    },
+    {
+      "arm": "B1",
+      "i": 55,
+      "expect": "reports.get",
+      "prompt": "Is rep_91 ready? Give me its link.",
+      "picked": "reports.get",
+      "correct": true,
+      "turns": 2,
+      "inputTokens": 1602
+    },
+    {
+      "arm": "B1",
+      "i": 56,
+      "expect": "reports.get",
+      "prompt": "Retrieve the result for report rep_410.",
+      "picked": "reports.get",
+      "correct": true,
+      "turns": 2,
+      "inputTokens": 1599
+    },
+    {
+      "arm": "B1",
+      "i": 57,
+      "expect": "reports.list",
+      "prompt": "What reports have we generated recently?",
+      "picked": "reports.list",
+      "correct": true,
+      "turns": 2,
+      "inputTokens": 1576
+    },
+    {
+      "arm": "B1",
+      "i": 58,
+      "expect": "reports.list",
+      "prompt": "Show the last few reports that were run.",
+      "picked": "reports.list",
+      "correct": true,
+      "turns": 2,
+      "inputTokens": 1578
+    },
+    {
+      "arm": "B1",
+      "i": 59,
+      "expect": "reports.list",
+      "prompt": "List the reports so I can find yesterday's revenue one.",
+      "picked": "reports.list",
+      "correct": true,
+      "turns": 2,
+      "inputTokens": 1608
+    },
+    {
+      "arm": "M1",
+      "i": 0,
+      "expect": "customers.get",
+      "prompt": "Show me the record for customer cus_4821.",
+      "picked": "customers.get",
+      "correct": true,
+      "turns": 1,
+      "inputTokens": 3611
+    },
+    {
+      "arm": "M1",
+      "i": 1,
+      "expect": "customers.get",
+      "prompt": "What's the open balance for cus_1033?",
+      "picked": "invoices.list",
+      "correct": false,
+      "turns": 1,
+      "inputTokens": 3610
+    },
+    {
+      "arm": "M1",
+      "i": 2,
+      "expect": "customers.get",
+      "prompt": "Pull up everything we have on customer cus_77.",
+      "picked": "customers.get",
+      "correct": true,
+      "turns": 1,
+      "inputTokens": 3613
+    },
+    {
+      "arm": "M1",
+      "i": 3,
+      "expect": "customers.find",
+      "prompt": "Which customer has the billing email accounts@atelier-nord.example?",
+      "picked": "customers.find",
+      "correct": true,
+      "turns": 1,
+      "inputTokens": 3619
+    },
+    {
+      "arm": "M1",
+      "i": 4,
+      "expect": "customers.find",
+      "prompt": "Do we have a customer called Nordlicht GmbH? I don't have the id.",
+      "picked": "customers.find",
+      "correct": true,
+      "turns": 1,
+      "inputTokens": 3623
+    },
+    {
+      "arm": "M1",
+      "i": 5,
+      "expect": "customers.find",
+      "prompt": "Look up the customer whose name contains Atelier.",
+      "picked": "customers.find",
+      "correct": true,
+      "turns": 1,
+      "inputTokens": 3613
+    },
+    {
+      "arm": "M1",
+      "i": 6,
+      "expect": "customers.create",
+      "prompt": "Add a new customer: Brandt & Söhne, billing at ap@brandt.example, invoicing in CHF.",
+      "picked": "customers.find",
+      "correct": false,
+      "turns": 1,
+      "inputTokens": 3635
+    },
+    {
+      "arm": "M1",
+      "i": 7,
+      "expect": "customers.create",
+      "prompt": "We just signed Kelvin Labs (finance@kelvin.example). Set them up in the system.",
+      "picked": "customers.find",
+      "correct": false,
+      "turns": 1,
+      "inputTokens": 3628
+    },
+    {
+      "arm": "M1",
+      "i": 8,
+      "expect": "customers.update",
+      "prompt": "Customer cus_4821 moved, their new billing email is ap@atelier-nord.example.",
+      "picked": "customers.update",
+      "correct": true,
+      "turns": 1,
+      "inputTokens": 3627
+    },
+    {
+      "arm": "M1",
+      "i": 9,
+      "expect": "customers.update",
+      "prompt": "Rename customer cus_309 to Helvetia Trading AG.",
+      "picked": "customers.update",
+      "correct": true,
+      "turns": 1,
+      "inputTokens": 3619
+    },
+    {
+      "arm": "M1",
+      "i": 10,
+      "expect": "customers.delete",
+      "prompt": "Customer cus_55 asked for erasure and has no open invoices. Delete the record.",
+      "picked": "customers.delete",
+      "correct": true,
+      "turns": 1,
+      "inputTokens": 3625
+    },
+    {
+      "arm": "M1",
+      "i": 11,
+      "expect": "customers.delete",
+      "prompt": "Remove duplicate customer cus_812 permanently; it has nothing open.",
+      "picked": "customers.delete",
+      "correct": true,
+      "turns": 1,
+      "inputTokens": 3622
+    },
+    {
+      "arm": "M1",
+      "i": 12,
+      "expect": "invoices.create",
+      "prompt": "Draft an invoice for cus_4821: 3 hours consulting at 120 EUR.",
+      "picked": "invoices.create",
+      "correct": true,
+      "turns": 1,
+      "inputTokens": 3627
+    },
+    {
+      "arm": "M1",
+      "i": 13,
+      "expect": "invoices.create",
+      "prompt": "Bill customer cus_1033 for 10 licences at 49 USD each, due 2026-11-30.",
+      "picked": "invoices.create",
+      "correct": true,
+      "turns": 1,
+      "inputTokens": 3631
+    },
+    {
+      "arm": "M1",
+      "i": 14,
+      "expect": "invoices.get",
+      "prompt": "What is the status of invoice inv_204?",
+      "picked": "invoices.get",
+      "correct": true,
+      "turns": 1,
+      "inputTokens": 3610
+    },
+    {
+      "arm": "M1",
+      "i": 15,
+      "expect": "invoices.get",
+      "prompt": "Show me the lines on invoice inv_311.",
+      "picked": "invoices.get",
+      "correct": true,
+      "turns": 1,
+      "inputTokens": 3612
+    },
+    {
+      "arm": "M1",
+      "i": 16,
+      "expect": "invoices.get",
+      "prompt": "Is inv_98 paid yet?",
+      "picked": "invoices.get",
+      "correct": true,
+      "turns": 1,
+      "inputTokens": 3609
+    },
+    {
+      "arm": "M1",
+      "i": 17,
+      "expect": "invoices.list",
+      "prompt": "List all open invoices for customer cus_4821.",
+      "picked": "invoices.list",
+      "correct": true,
+      "turns": 1,
+      "inputTokens": 3612
+    },
+    {
+      "arm": "M1",
+      "i": 18,
+      "expect": "invoices.list",
+      "prompt": "Show me every draft invoice we have.",
+      "picked": "invoices.list",
+      "correct": true,
+      "turns": 1,
+      "inputTokens": 3609
+    },
+    {
+      "arm": "M1",
+      "i": 19,
+      "expect": "invoices.list",
+      "prompt": "Which invoices have been voided so far?",
+      "picked": "invoices.list",
+      "correct": true,
+      "turns": 1,
+      "inputTokens": 3609
+    },
+    {
+      "arm": "M1",
+      "i": 20,
+      "expect": "invoices.send",
+      "prompt": "Invoice inv_204 is finalized. Email it to the customer.",
+      "picked": "invoices.send",
+      "correct": true,
+      "turns": 1,
+      "inputTokens": 3619
+    },
+    {
+      "arm": "M1",
+      "i": 21,
+      "expect": "invoices.send",
+      "prompt": "Send inv_311 to the client with a note saying thanks for the quick turnaround.",
+      "picked": "invoices.send",
+      "correct": true,
+      "turns": 1,
+      "inputTokens": 3624
+    },
+    {
+      "arm": "M1",
+      "i": 22,
+      "expect": "invoices.void",
+      "prompt": "Invoice inv_98 was issued by mistake and is unpaid. Void it.",
+      "picked": "invoices.void",
+      "correct": true,
+      "turns": 1,
+      "inputTokens": 3624
+    },
+    {
+      "arm": "M1",
+      "i": 23,
+      "expect": "invoices.void",
+      "prompt": "Cancel invoice inv_150, it's a duplicate and nobody paid it.",
+      "picked": "invoices.void",
+      "correct": true,
+      "turns": 1,
+      "inputTokens": 3624
+    },
+    {
+      "arm": "M1",
+      "i": 24,
+      "expect": "invoices.void",
+      "prompt": "Void invoice inv_77; it was raised against the wrong customer and is unpaid.",
+      "picked": "invoices.void",
+      "correct": true,
+      "turns": 1,
+      "inputTokens": 3625
+    },
+    {
+      "arm": "M1",
+      "i": 25,
+      "expect": "payments.record",
+      "prompt": "We received a bank transfer of 360 EUR yesterday for invoice inv_204. Record it.",
+      "picked": "invoices.get",
+      "correct": false,
+      "turns": 1,
+      "inputTokens": 3629
+    },
+    {
+      "arm": "M1",
+      "i": 26,
+      "expect": "payments.record",
+      "prompt": "Mark 1,200 USD as received against inv_311 today.",
+      "picked": "invoices.get",
+      "correct": false,
+      "turns": 1,
+      "inputTokens": 3617
+    },
+    {
+      "arm": "M1",
+      "i": 27,
+      "expect": "payments.get",
+      "prompt": "What are the details of payment pay_77?",
+      "picked": "payments.get",
+      "correct": true,
+      "turns": 1,
+      "inputTokens": 3609
+    },
+    {
+      "arm": "M1",
+      "i": 28,
+      "expect": "payments.get",
+      "prompt": "When was pay_410 received and for how much?",
+      "picked": "payments.get",
+      "correct": true,
+      "turns": 1,
+      "inputTokens": 3610
+    },
+    {
+      "arm": "M1",
+      "i": 29,
+      "expect": "payments.list",
+      "prompt": "Show all payments recorded against invoice inv_204.",
+      "picked": "payments.list",
+      "correct": true,
+      "turns": 1,
+      "inputTokens": 3614
+    },
+    {
+      "arm": "M1",
+      "i": 30,
+      "expect": "payments.list",
+      "prompt": "List the latest payments we've received.",
+      "picked": "payments.list",
+      "correct": true,
+      "turns": 1,
+      "inputTokens": 3607
+    },
+    {
+      "arm": "M1",
+      "i": 31,
+      "expect": "payments.list",
+      "prompt": "Has anything been paid on inv_98? Show the payments.",
+      "picked": "payments.list",
+      "correct": true,
+      "turns": 1,
+      "inputTokens": 3616
+    },
+    {
+      "arm": "M1",
+      "i": 32,
+      "expect": "payments.refund",
+      "prompt": "Refund payment pay_77 in full to the customer.",
+      "picked": "payments.get",
+      "correct": false,
+      "turns": 1,
+      "inputTokens": 3614
+    },
+    {
+      "arm": "M1",
+      "i": 33,
+      "expect": "payments.refund",
+      "prompt": "Give back 50 EUR from payment pay_410.",
+      "picked": "payments.refund",
+      "correct": true,
+      "turns": 1,
+      "inputTokens": 3614
+    },
+    {
+      "arm": "M1",
+      "i": 34,
+      "expect": "payments.refund",
+      "prompt": "The client was double charged on payment pay_512. Refund it.",
+      "picked": "payments.get",
+      "correct": false,
+      "turns": 1,
+      "inputTokens": 3616
+    },
+    {
+      "arm": "M1",
+      "i": 35,
+      "expect": "payments.reconcile",
+      "prompt": "Bank transaction btx_9021 matches payment pay_77. Link them.",
+      "picked": "payments.reconcile",
+      "correct": true,
+      "turns": 1,
+      "inputTokens": 3622
+    },
+    {
+      "arm": "M1",
+      "i": 36,
+      "expect": "payments.reconcile",
+      "prompt": "Reconcile pay_410 with bank transaction btx_9100.",
+      "picked": "payments.reconcile",
+      "correct": true,
+      "turns": 1,
+      "inputTokens": 3619
+    },
+    {
+      "arm": "M1",
+      "i": 37,
+      "expect": "subscriptions.create",
+      "prompt": "Start customer cus_4821 on the Pro plan beginning 2026-11-01.",
+      "picked": "subscriptions.create",
+      "correct": true,
+      "turns": 1,
+      "inputTokens": 3625
+    },
+    {
+      "arm": "M1",
+      "i": 38,
+      "expect": "subscriptions.create",
+      "prompt": "Sign up cus_1033 for the Basic plan.",
+      "picked": "subscriptions.create",
+      "correct": true,
+      "turns": 1,
+      "inputTokens": 3615
+    },
+    {
+      "arm": "M1",
+      "i": 39,
+      "expect": "subscriptions.get",
+      "prompt": "What plan is subscription sub_19 on and when does it renew?",
+      "picked": "subscriptions.get",
+      "correct": true,
+      "turns": 1,
+      "inputTokens": 3617
+    },
+    {
+      "arm": "M1",
+      "i": 40,
+      "expect": "subscriptions.get",
+      "prompt": "Is sub_42 still active?",
+      "picked": "subscriptions.get",
+      "correct": true,
+      "turns": 1,
+      "inputTokens": 3607
+    },
+    {
+      "arm": "M1",
+      "i": 41,
+      "expect": "subscriptions.get",
+      "prompt": "Show me subscription sub_61.",
+      "picked": "subscriptions.get",
+      "correct": true,
+      "turns": 1,
+      "inputTokens": 3608
+    },
+    {
+      "arm": "M1",
+      "i": 42,
+      "expect": "subscriptions.changePlan",
+      "prompt": "Upgrade sub_19 to the Enterprise plan.",
+      "picked": "subscriptions.changePlan",
+      "correct": true,
+      "turns": 1,
+      "inputTokens": 3617
+    },
+    {
+      "arm": "M1",
+      "i": 43,
+      "expect": "subscriptions.changePlan",
+      "prompt": "Customer wants to downgrade sub_42 to Basic, switch it.",
+      "picked": "subscriptions.changePlan",
+      "correct": true,
+      "turns": 1,
+      "inputTokens": 3621
+    },
+    {
+      "arm": "M1",
+      "i": 44,
+      "expect": "subscriptions.pause",
+      "prompt": "Pause sub_19 until 2027-01-15, the customer is on leave.",
+      "picked": "subscriptions.pause",
+      "correct": true,
+      "turns": 1,
+      "inputTokens": 3622
+    },
+    {
+      "arm": "M1",
+      "i": 45,
+      "expect": "subscriptions.pause",
+      "prompt": "Put subscription sub_42 on hold for now, we'll resume later.",
+      "picked": "subscriptions.pause",
+      "correct": true,
+      "turns": 1,
+      "inputTokens": 3620
+    },
+    {
+      "arm": "M1",
+      "i": 46,
+      "expect": "subscriptions.cancel",
+      "prompt": "Cancel subscription sub_19 at the end of the period.",
+      "picked": "subscriptions.cancel",
+      "correct": true,
+      "turns": 1,
+      "inputTokens": 3616
+    },
+    {
+      "arm": "M1",
+      "i": 47,
+      "expect": "subscriptions.cancel",
+      "prompt": "Customer cus_55 is leaving. End sub_61 for good.",
+      "picked": "subscriptions.get",
+      "correct": false,
+      "turns": 1,
+      "inputTokens": 3619
+    },
+    {
+      "arm": "M1",
+      "i": 48,
+      "expect": "reports.revenue",
+      "prompt": "How much revenue did we book between 2026-07-01 and 2026-09-30?",
+      "picked": "reports.revenue",
+      "correct": true,
+      "turns": 1,
+      "inputTokens": 3623
+    },
+    {
+      "arm": "M1",
+      "i": 49,
+      "expect": "reports.revenue",
+      "prompt": "Run a revenue report for October 2026.",
+      "picked": "reports.revenue",
+      "correct": true,
+      "turns": 1,
+      "inputTokens": 3610
+    },
+    {
+      "arm": "M1",
+      "i": 50,
+      "expect": "reports.aging",
+      "prompt": "Which customers are overdue? I need an aging report as of today.",
+      "picked": "reports.aging",
+      "correct": true,
+      "turns": 1,
+      "inputTokens": 3616
+    },
+    {
+      "arm": "M1",
+      "i": 51,
+      "expect": "reports.aging",
+      "prompt": "Give me the AR aging as of 2026-09-30.",
+      "picked": "reports.aging",
+      "correct": true,
+      "turns": 1,
+      "inputTokens": 3615
+    },
+    {
+      "arm": "M1",
+      "i": 52,
+      "expect": "reports.taxSummary",
+      "prompt": "I need the VAT summary for Q3 2026.",
+      "picked": "reports.taxSummary",
+      "correct": true,
+      "turns": 1,
+      "inputTokens": 3613
+    },
+    {
+      "arm": "M1",
+      "i": 53,
+      "expect": "reports.taxSummary",
+      "prompt": "Prepare the tax summary for the first quarter of 2026.",
+      "picked": "reports.taxSummary",
+      "correct": true,
+      "turns": 1,
+      "inputTokens": 3617
+    },
+    {
+      "arm": "M1",
+      "i": 54,
+      "expect": "reports.get",
+      "prompt": "Report rep_330 should be done by now. Fetch it.",
+      "picked": "reports.get",
+      "correct": true,
+      "turns": 1,
+      "inputTokens": 3616
+    },
+    {
+      "arm": "M1",
+      "i": 55,
+      "expect": "reports.get",
+      "prompt": "Is rep_91 ready? Give me its link.",
+      "picked": "reports.get",
+      "correct": true,
+      "turns": 1,
+      "inputTokens": 3613
+    },
+    {
+      "arm": "M1",
+      "i": 56,
+      "expect": "reports.get",
+      "prompt": "Retrieve the result for report rep_410.",
+      "picked": "reports.get",
+      "correct": true,
+      "turns": 1,
+      "inputTokens": 3611
+    },
+    {
+      "arm": "M1",
+      "i": 57,
+      "expect": "reports.list",
+      "prompt": "What reports have we generated recently?",
+      "picked": "reports.list",
+      "correct": true,
+      "turns": 1,
+      "inputTokens": 3607
+    },
+    {
+      "arm": "M1",
+      "i": 58,
+      "expect": "reports.list",
+      "prompt": "Show the last few reports that were run.",
+      "picked": "reports.list",
+      "correct": true,
+      "turns": 1,
+      "inputTokens": 3608
+    },
+    {
+      "arm": "M1",
+      "i": 59,
+      "expect": "reports.list",
+      "prompt": "List the reports so I can find yesterday's revenue one.",
+      "picked": "reports.list",
+      "correct": true,
+      "turns": 1,
+      "inputTokens": 3615
+    },
+    {
+      "arm": "M2",
+      "i": 0,
+      "expect": "customers.get",
+      "prompt": "Show me the record for customer cus_4821.",
+      "picked": "customers.get",
+      "correct": true,
+      "turns": 1,
+      "inputTokens": 2070
+    },
+    {
+      "arm": "M2",
+      "i": 1,
+      "expect": "customers.get",
+      "prompt": "What's the open balance for cus_1033?",
+      "picked": "customers.get",
+      "correct": true,
+      "turns": 1,
+      "inputTokens": 2000
+    },
+    {
+      "arm": "M2",
+      "i": 2,
+      "expect": "customers.get",
+      "prompt": "Pull up everything we have on customer cus_77.",
+      "picked": "customers.get",
+      "correct": true,
+      "turns": 1,
+      "inputTokens": 2775
+    },
+    {
+      "arm": "M2",
+      "i": 3,
+      "expect": "customers.find",
+      "prompt": "Which customer has the billing email accounts@atelier-nord.example?",
+      "picked": "customers.find",
+      "correct": true,
+      "turns": 1,
+      "inputTokens": 2212
+    },
+    {
+      "arm": "M2",
+      "i": 4,
+      "expect": "customers.find",
+      "prompt": "Do we have a customer called Nordlicht GmbH? I don't have the id.",
+      "picked": "customers.find",
+      "correct": true,
+      "turns": 1,
+      "inputTokens": 2144
+    },
+    {
+      "arm": "M2",
+      "i": 5,
+      "expect": "customers.find",
+      "prompt": "Look up the customer whose name contains Atelier.",
+      "picked": "customers.find",
+      "correct": true,
+      "turns": 1,
+      "inputTokens": 2124
+    },
+    {
+      "arm": "M2",
+      "i": 6,
+      "expect": "customers.create",
+      "prompt": "Add a new customer: Brandt & Söhne, billing at ap@brandt.example, invoicing in CHF.",
+      "picked": "customers.find",
+      "correct": false,
+      "turns": 1,
+      "inputTokens": 2238
+    },
+    {
+      "arm": "M2",
+      "i": 7,
+      "expect": "customers.create",
+      "prompt": "We just signed Kelvin Labs (finance@kelvin.example). Set them up in the system.",
+      "picked": "customers.find",
+      "correct": false,
+      "turns": 1,
+      "inputTokens": 2237
+    },
+    {
+      "arm": "M2",
+      "i": 8,
+      "expect": "customers.update",
+      "prompt": "Customer cus_4821 moved, their new billing email is ap@atelier-nord.example.",
+      "picked": "customers.update",
+      "correct": true,
+      "turns": 1,
+      "inputTokens": 2103
+    },
+    {
+      "arm": "M2",
+      "i": 9,
+      "expect": "customers.update",
+      "prompt": "Rename customer cus_309 to Helvetia Trading AG.",
+      "picked": "customers.update",
+      "correct": true,
+      "turns": 1,
+      "inputTokens": 4038
+    },
+    {
+      "arm": "M2",
+      "i": 10,
+      "expect": "customers.delete",
+      "prompt": "Customer cus_55 asked for erasure and has no open invoices. Delete the record.",
+      "picked": "customers.delete",
+      "correct": true,
+      "turns": 1,
+      "inputTokens": 2113
+    },
+    {
+      "arm": "M2",
+      "i": 11,
+      "expect": "customers.delete",
+      "prompt": "Remove duplicate customer cus_812 permanently; it has nothing open.",
+      "picked": "customers.delete",
+      "correct": true,
+      "turns": 1,
+      "inputTokens": 2018
+    },
+    {
+      "arm": "M2",
+      "i": 12,
+      "expect": "invoices.create",
+      "prompt": "Draft an invoice for cus_4821: 3 hours consulting at 120 EUR.",
+      "picked": "invoices.create",
+      "correct": true,
+      "turns": 1,
+      "inputTokens": 2305
+    },
+    {
+      "arm": "M2",
+      "i": 13,
+      "expect": "invoices.create",
+      "prompt": "Bill customer cus_1033 for 10 licences at 49 USD each, due 2026-11-30.",
+      "picked": "invoices.create",
+      "correct": true,
+      "turns": 1,
+      "inputTokens": 2311
+    },
+    {
+      "arm": "M2",
+      "i": 14,
+      "expect": "invoices.get",
+      "prompt": "What is the status of invoice inv_204?",
+      "picked": "invoices.get",
+      "correct": true,
+      "turns": 1,
+      "inputTokens": 2006
+    },
+    {
+      "arm": "M2",
+      "i": 15,
+      "expect": "invoices.get",
+      "prompt": "Show me the lines on invoice inv_311.",
+      "picked": "invoices.get",
+      "correct": true,
+      "turns": 1,
+      "inputTokens": 2187
+    },
+    {
+      "arm": "M2",
+      "i": 16,
+      "expect": "invoices.get",
+      "prompt": "Is inv_98 paid yet?",
+      "picked": "payments.list",
+      "correct": false,
+      "turns": 1,
+      "inputTokens": 2055
+    },
+    {
+      "arm": "M2",
+      "i": 17,
+      "expect": "invoices.list",
+      "prompt": "List all open invoices for customer cus_4821.",
+      "picked": "invoices.list",
+      "correct": true,
+      "turns": 1,
+      "inputTokens": 2020
+    },
+    {
+      "arm": "M2",
+      "i": 18,
+      "expect": "invoices.list",
+      "prompt": "Show me every draft invoice we have.",
+      "picked": "invoices.list",
+      "correct": true,
+      "turns": 1,
+      "inputTokens": 2198
+    },
+    {
+      "arm": "M2",
+      "i": 19,
+      "expect": "invoices.list",
+      "prompt": "Which invoices have been voided so far?",
+      "picked": "invoices.list",
+      "correct": true,
+      "turns": 1,
+      "inputTokens": 1982
+    },
+    {
+      "arm": "M2",
+      "i": 20,
+      "expect": "invoices.send",
+      "prompt": "Invoice inv_204 is finalized. Email it to the customer.",
+      "picked": "invoices.send",
+      "correct": true,
+      "turns": 1,
+      "inputTokens": 2064
+    },
+    {
+      "arm": "M2",
+      "i": 21,
+      "expect": "invoices.send",
+      "prompt": "Send inv_311 to the client with a note saying thanks for the quick turnaround.",
+      "picked": "invoices.send",
+      "correct": true,
+      "turns": 1,
+      "inputTokens": 2030
+    },
+    {
+      "arm": "M2",
+      "i": 22,
+      "expect": "invoices.void",
+      "prompt": "Invoice inv_98 was issued by mistake and is unpaid. Void it.",
+      "picked": "invoices.void",
+      "correct": true,
+      "turns": 1,
+      "inputTokens": 2033
+    },
+    {
+      "arm": "M2",
+      "i": 23,
+      "expect": "invoices.void",
+      "prompt": "Cancel invoice inv_150, it's a duplicate and nobody paid it.",
+      "picked": "invoices.get",
+      "correct": false,
+      "turns": 1,
+      "inputTokens": 2040
+    },
+    {
+      "arm": "M2",
+      "i": 24,
+      "expect": "invoices.void",
+      "prompt": "Void invoice inv_77; it was raised against the wrong customer and is unpaid.",
+      "picked": "invoices.void",
+      "correct": true,
+      "turns": 1,
+      "inputTokens": 2035
+    },
+    {
+      "arm": "M2",
+      "i": 25,
+      "expect": "payments.record",
+      "prompt": "We received a bank transfer of 360 EUR yesterday for invoice inv_204. Record it.",
+      "picked": "payments.list",
+      "correct": false,
+      "turns": 1,
+      "inputTokens": 2134
+    },
+    {
+      "arm": "M2",
+      "i": 26,
+      "expect": "payments.record",
+      "prompt": "Mark 1,200 USD as received against inv_311 today.",
+      "picked": "payments.list",
+      "correct": false,
+      "turns": 1,
+      "inputTokens": 2068
+    },
+    {
+      "arm": "M2",
+      "i": 27,
+      "expect": "payments.get",
+      "prompt": "What are the details of payment pay_77?",
+      "picked": "payments.get",
+      "correct": true,
+      "turns": 1,
+      "inputTokens": 2058
+    },
+    {
+      "arm": "M2",
+      "i": 28,
+      "expect": "payments.get",
+      "prompt": "When was pay_410 received and for how much?",
+      "picked": "payments.get",
+      "correct": true,
+      "turns": 1,
+      "inputTokens": 2062
+    },
+    {
+      "arm": "M2",
+      "i": 29,
+      "expect": "payments.list",
+      "prompt": "Show all payments recorded against invoice inv_204.",
+      "picked": "payments.list",
+      "correct": true,
+      "turns": 1,
+      "inputTokens": 2050
+    },
+    {
+      "arm": "M2",
+      "i": 30,
+      "expect": "payments.list",
+      "prompt": "List the latest payments we've received.",
+      "picked": "payments.list",
+      "correct": true,
+      "turns": 1,
+      "inputTokens": 1985
+    },
+    {
+      "arm": "M2",
+      "i": 31,
+      "expect": "payments.list",
+      "prompt": "Has anything been paid on inv_98? Show the payments.",
+      "picked": "payments.list",
+      "correct": true,
+      "turns": 1,
+      "inputTokens": 2054
+    },
+    {
+      "arm": "M2",
+      "i": 32,
+      "expect": "payments.refund",
+      "prompt": "Refund payment pay_77 in full to the customer.",
+      "picked": "payments.get",
+      "correct": false,
+      "turns": 1,
+      "inputTokens": 2068
+    },
+    {
+      "arm": "M2",
+      "i": 33,
+      "expect": "payments.refund",
+      "prompt": "Give back 50 EUR from payment pay_410.",
+      "picked": "payments.get",
+      "correct": false,
+      "turns": 1,
+      "inputTokens": 2068
+    },
+    {
+      "arm": "M2",
+      "i": 34,
+      "expect": "payments.refund",
+      "prompt": "The client was double charged on payment pay_512. Refund it.",
+      "picked": "payments.get",
+      "correct": false,
+      "turns": 1,
+      "inputTokens": 2086
+    },
+    {
+      "arm": "M2",
+      "i": 35,
+      "expect": "payments.reconcile",
+      "prompt": "Bank transaction btx_9021 matches payment pay_77. Link them.",
+      "picked": "payments.reconcile",
+      "correct": true,
+      "turns": 1,
+      "inputTokens": 2089
+    },
+    {
+      "arm": "M2",
+      "i": 36,
+      "expect": "payments.reconcile",
+      "prompt": "Reconcile pay_410 with bank transaction btx_9100.",
+      "picked": "payments.reconcile",
+      "correct": true,
+      "turns": 1,
+      "inputTokens": 2085
+    },
+    {
+      "arm": "M2",
+      "i": 37,
+      "expect": "subscriptions.create",
+      "prompt": "Start customer cus_4821 on the Pro plan beginning 2026-11-01.",
+      "picked": "subscriptions.create",
+      "correct": true,
+      "turns": 1,
+      "inputTokens": 2315
+    },
+    {
+      "arm": "M2",
+      "i": 38,
+      "expect": "subscriptions.create",
+      "prompt": "Sign up cus_1033 for the Basic plan.",
+      "picked": "subscriptions.create",
+      "correct": true,
+      "turns": 1,
+      "inputTokens": 2283
+    },
+    {
+      "arm": "M2",
+      "i": 39,
+      "expect": "subscriptions.get",
+      "prompt": "What plan is subscription sub_19 on and when does it renew?",
+      "picked": "subscriptions.get",
+      "correct": true,
+      "turns": 1,
+      "inputTokens": 1943
+    },
+    {
+      "arm": "M2",
+      "i": 40,
+      "expect": "subscriptions.get",
+      "prompt": "Is sub_42 still active?",
+      "picked": "subscriptions.get",
+      "correct": true,
+      "turns": 1,
+      "inputTokens": 2068
+    },
+    {
+      "arm": "M2",
+      "i": 41,
+      "expect": "subscriptions.get",
+      "prompt": "Show me subscription sub_61.",
+      "picked": "subscriptions.get",
+      "correct": true,
+      "turns": 1,
+      "inputTokens": 1994
+    },
+    {
+      "arm": "M2",
+      "i": 42,
+      "expect": "subscriptions.changePlan",
+      "prompt": "Upgrade sub_19 to the Enterprise plan.",
+      "picked": "subscriptions.changePlan",
+      "correct": true,
+      "turns": 1,
+      "inputTokens": 1947
+    },
+    {
+      "arm": "M2",
+      "i": 43,
+      "expect": "subscriptions.changePlan",
+      "prompt": "Customer wants to downgrade sub_42 to Basic, switch it.",
+      "picked": "subscriptions.get",
+      "correct": false,
+      "turns": 1,
+      "inputTokens": 2097
+    },
+    {
+      "arm": "M2",
+      "i": 44,
+      "expect": "subscriptions.pause",
+      "prompt": "Pause sub_19 until 2027-01-15, the customer is on leave.",
+      "picked": "subscriptions.pause",
+      "correct": true,
+      "turns": 1,
+      "inputTokens": 2091
+    },
+    {
+      "arm": "M2",
+      "i": 45,
+      "expect": "subscriptions.pause",
+      "prompt": "Put subscription sub_42 on hold for now, we'll resume later.",
+      "picked": "subscriptions.pause",
+      "correct": true,
+      "turns": 1,
+      "inputTokens": 2087
+    },
+    {
+      "arm": "M2",
+      "i": 46,
+      "expect": "subscriptions.cancel",
+      "prompt": "Cancel subscription sub_19 at the end of the period.",
+      "picked": "subscriptions.cancel",
+      "correct": true,
+      "turns": 1,
+      "inputTokens": 1942
+    },
+    {
+      "arm": "M2",
+      "i": 47,
+      "expect": "subscriptions.cancel",
+      "prompt": "Customer cus_55 is leaving. End sub_61 for good.",
+      "picked": "subscriptions.get",
+      "correct": false,
+      "turns": 1,
+      "inputTokens": 1948
+    },
+    {
+      "arm": "M2",
+      "i": 48,
+      "expect": "reports.revenue",
+      "prompt": "How much revenue did we book between 2026-07-01 and 2026-09-30?",
+      "picked": "reports.revenue",
+      "correct": true,
+      "turns": 1,
+      "inputTokens": 2263
+    },
+    {
+      "arm": "M2",
+      "i": 49,
+      "expect": "reports.revenue",
+      "prompt": "Run a revenue report for October 2026.",
+      "picked": "reports.revenue",
+      "correct": true,
+      "turns": 1,
+      "inputTokens": 1822
+    },
+    {
+      "arm": "M2",
+      "i": 50,
+      "expect": "reports.aging",
+      "prompt": "Which customers are overdue? I need an aging report as of today.",
+      "picked": "reports.aging",
+      "correct": true,
+      "turns": 1,
+      "inputTokens": 1997
+    },
+    {
+      "arm": "M2",
+      "i": 51,
+      "expect": "reports.aging",
+      "prompt": "Give me the AR aging as of 2026-09-30.",
+      "picked": "reports.aging",
+      "correct": true,
+      "turns": 1,
+      "inputTokens": 1990
+    },
+    {
+      "arm": "M2",
+      "i": 52,
+      "expect": "reports.taxSummary",
+      "prompt": "I need the VAT summary for Q3 2026.",
+      "picked": "reports.taxSummary",
+      "correct": true,
+      "turns": 1,
+      "inputTokens": 1952
+    },
+    {
+      "arm": "M2",
+      "i": 53,
+      "expect": "reports.taxSummary",
+      "prompt": "Prepare the tax summary for the first quarter of 2026.",
+      "picked": "reports.taxSummary",
+      "correct": true,
+      "turns": 1,
+      "inputTokens": 1541
+    },
+    {
+      "arm": "M2",
+      "i": 54,
+      "expect": "reports.get",
+      "prompt": "Report rep_330 should be done by now. Fetch it.",
+      "picked": "reports.get",
+      "correct": true,
+      "turns": 1,
+      "inputTokens": 1960
+    },
+    {
+      "arm": "M2",
+      "i": 55,
+      "expect": "reports.get",
+      "prompt": "Is rep_91 ready? Give me its link.",
+      "picked": "reports.get",
+      "correct": true,
+      "turns": 1,
+      "inputTokens": 1973
+    },
+    {
+      "arm": "M2",
+      "i": 56,
+      "expect": "reports.get",
+      "prompt": "Retrieve the result for report rep_410.",
+      "picked": "reports.get",
+      "correct": true,
+      "turns": 1,
+      "inputTokens": 1826
+    },
+    {
+      "arm": "M2",
+      "i": 57,
+      "expect": "reports.list",
+      "prompt": "What reports have we generated recently?",
+      "picked": "reports.list",
+      "correct": true,
+      "turns": 1,
+      "inputTokens": 1957
+    },
+    {
+      "arm": "M2",
+      "i": 58,
+      "expect": "reports.list",
+      "prompt": "Show the last few reports that were run.",
+      "picked": "reports.list",
+      "correct": true,
+      "turns": 1,
+      "inputTokens": 1960
+    },
+    {
+      "arm": "M2",
+      "i": 59,
+      "expect": "reports.list",
+      "prompt": "List the reports so I can find yesterday's revenue one.",
+      "picked": "reports.list",
+      "correct": true,
+      "turns": 1,
+      "inputTokens": 1971
+    }
+  ]
+}
