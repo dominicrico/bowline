@@ -12,5 +12,5 @@
     "verbatimModuleSyntax": true,
     "types": ["node"]
   },
-  "include": ["packages/*/src", "examples/*/src", "scripts"]
+  "include": ["packages/*/src", "examples/*/src", "scripts", "bench"]
 }

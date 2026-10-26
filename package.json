@@ -7,7 +7,8 @@
     "test": "node --test \"packages/*/src/**/*.test.ts\" \"examples/*/src/**/*.test.ts\"",
     "demo": "node examples/billing/src/main.ts",
     "bench-idle": "node --env-file=.env scripts/bench-idle.ts",
-    "m2-turns": "node --env-file=.env scripts/m2-turns.ts"
+    "m2-turns": "node --env-file=.env scripts/m2-turns.ts",
+    "bench-tasks": "node --env-file=.env scripts/bench-tasks.ts"
   },
   "devDependencies": {
     "@bowline/bridges": "workspace:*",
