@@ -15,4 +15,5 @@ test("maps capabilities to tools with expanded input and an effect sentence", ()
   assert.equal(tool!.name, "invoices_void");
   assert.equal(tool!.description, "Void an unpaid invoice. Effect: destructive, idempotent.");
   assert.deepEqual(tool!.inputSchema.required, ["invoiceId"]);
+  assert.deepEqual(tool!.annotations, { readOnlyHint: false, destructiveHint: true, idempotentHint: true, openWorldHint: false });
 });

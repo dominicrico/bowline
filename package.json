@@ -9,12 +9,15 @@
     "bench-idle": "node --env-file=.env scripts/bench-idle.ts",
     "m2-turns": "node --env-file=.env scripts/m2-turns.ts",
     "bench-tasks": "node --env-file=.env scripts/bench-tasks.ts",
-    "bench-select": "node --env-file=.env scripts/bench-select.ts"
+    "bench-select": "node --env-file=.env scripts/bench-select.ts",
+    "scenario-tamper": "node scripts/scenario-tamper.ts"
   },
   "devDependencies": {
     "@bowline/bridges": "workspace:*",
     "@bowline/client": "workspace:*",
     "@bowline/server": "workspace:*",
+    "@bowline/spec-types": "workspace:*",
+    "@modelcontextprotocol/sdk": "1.32.1",
     "@types/node": "^26.6.5",
     "typescript": "^7.0.2"
   }

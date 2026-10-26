@@ -5,6 +5,7 @@ export interface McpTool {
   name: string;
   description: string;
   inputSchema: JsonSchema;
+  annotations: { readOnlyHint: boolean; destructiveHint: boolean; idempotentHint: boolean; openWorldHint: boolean };
 }
 
 /** Effect class and idempotency, as the one short sentence the benchmark protocol adds to MCP descriptions. */
@@ -19,6 +20,12 @@ export function toMcpTools(docs: Iterable<GroupDocument>): McpTool[] {
       name: c.id.replaceAll(".", "_"),
       description: `${c.summary}. ${effectSentence(c)}`,
       inputSchema: expand(parseSignature(c.sig), doc.types).input,
+      annotations: {
+        readOnlyHint: c.effect === "read",
+        destructiveHint: c.effect === "destructive",
+        idempotentHint: c.idempotent,
+        openWorldHint: c.effect === "external",
+      },
     })),
   );
 }
