@@ -28,7 +28,7 @@ The idea came from a critical review of the article "MCP Is Dead" (Lucas McGrego
 
 Gate results: G1, G2 and G3 passed, G4 failed (see `docs/benchmark-protocol.md` changelog). Deferred MCP tool search removes most of the context-cost advantage, and the tampering scenario shows client-side pinning closes most of the security gap. Next steps: discuss the first proposal (`docs/mcp-sep-signed-pinned-tools.md`) in an MCP working group before any pull request, build a TypeScript SDK prototype, and test publisher-signed manifests. Core design decision 8 and the adoption goal in decision 9 stand. Decisions 1 to 7 are now the content of proposals, not of a standalone spec. Do not submit anything to MCP without the owner's approval.
 
-## Earlier focus: roadmap step v0.2 (done)
+## Earlier focus: roadmap step v0.2 (partly done: discovery, client pinning, MCP bridge and benchmarks exist; call endpoint, task resource and idempotency store were not built)
 
 Build the TypeScript reference implementation first:
 
