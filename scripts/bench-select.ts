@@ -1,5 +1,7 @@
 // Selection accuracy (docs/benchmark-protocol.md, "Selection accuracy"): 60 prompts x arms B1, M1, M2 on C1 at 25.
 // The first client tool call is the model's pick. B1 counts only if the model described the right group first.
+// B1_VARIANT=effect-sentence runs B1 only, with tier 2 worded like the MCP arm (effect as a sentence after the summary,
+// no step-up or scope flags). Reported-only experiment; writes variant-<name>-<timestamp>.json, never select-*.
 // Run: pnpm bench-select   (real requests, tool_choice auto; writes bench/results/select-<timestamp>.json)
 import { mkdirSync, writeFileSync } from "node:fs";
 import { toMcpTools } from "@bowline/bridges";
@@ -37,6 +39,15 @@ async function post(body: Record<string, unknown>): Promise<Reply> {
   }
 }
 
+const variant = process.env.B1_VARIANT;
+const renderTier2 = (doc: Parameters<typeof renderGroup>[0]) =>
+  variant === "effect-sentence"
+    ? [
+        ...doc.capabilities.map((c) => `${c.id}  ${c.summary}. Effect: ${c.effect}, ${c.idempotent ? "idempotent" : "not idempotent"}.\n  ${c.sig}`),
+        ...(Object.keys(doc.types).length ? ["types:", ...Object.entries(doc.types).map(([n, t]) => `  ${n} = ${t}`)] : []),
+      ].join("\n")
+    : renderGroup(doc);
+
 const tool = (name: string, description: string, input_schema: object) => ({ name, description, input_schema });
 const d = createDiscovery(catalog);
 const mcp = toMcpTools(d.documents.values()).map((t) => tool(t.name, t.description, t.inputSchema));
@@ -71,7 +82,7 @@ async function run(arm: keyof typeof arms, prompt: string, expect: string) {
         const group = String(use.input?.group ?? "").replace(/^billing\./, "");
         const doc = d.documents.get(group);
         if (doc) described.add(group);
-        results.push({ type: "tool_result", tool_use_id: use.id, content: doc ? renderGroup(doc) : `unknown group ${group}`, ...(doc ? {} : { is_error: true }) });
+        results.push({ type: "tool_result", tool_use_id: use.id, content: doc ? renderTier2(doc) : `unknown group ${group}`, ...(doc ? {} : { is_error: true }) });
         continue;
       }
       const picked = arm === "B1" ? String(use.input?.capability ?? "") : use.name!.replace("_", ".");
@@ -85,7 +96,7 @@ async function run(arm: keyof typeof arms, prompt: string, expect: string) {
 }
 
 // Small worker pool: 4 requests in flight.
-const jobs = (["B1", "M1", "M2"] as const).flatMap((arm) => prompts.map((p, i) => ({ arm, i, ...p })));
+const jobs = (variant ? (["B1"] as const) : (["B1", "M1", "M2"] as const)).flatMap((arm) => prompts.map((p, i) => ({ arm, i, ...p })));
 const rows: (typeof jobs[number] & Awaited<ReturnType<typeof run>>)[] = [];
 let next = 0;
 await Promise.all(Array.from({ length: 4 }, async () => {
@@ -96,7 +107,7 @@ await Promise.all(Array.from({ length: 4 }, async () => {
 }));
 rows.sort((a, b) => a.arm.localeCompare(b.arm) || a.i - b.i);
 
-const accuracy = Object.fromEntries((["B1", "M1", "M2"] as const).map((a) => {
+const accuracy = Object.fromEntries((variant ? (["B1"] as const) : (["B1", "M1", "M2"] as const)).map((a) => {
   const r = rows.filter((x) => x.arm === a);
   return [a, { correct: r.filter((x) => x.correct).length, of: r.length, pct: (100 * r.filter((x) => x.correct).length) / r.length }];
 }));
@@ -107,12 +118,12 @@ const result = {
   date: new Date().toISOString(),
   accuracy,
   // G4: B1 >= M1 minus 5 points.
-  G4: accuracy.B1!.pct >= accuracy.M1!.pct - 5,
+  ...(variant ? { variant } : { G4: accuracy.B1!.pct >= accuracy.M1!.pct - 5 }),
   rows,
 };
 mkdirSync("bench/results", { recursive: true });
-const file = `bench/results/select-${result.date.replaceAll(":", "-")}.json`;
+const file = `bench/results/${variant ? `variant-${variant}` : "select"}-${result.date.replaceAll(":", "-")}.json`;
 writeFileSync(file, JSON.stringify(result, null, 2) + "\n");
-console.log(JSON.stringify({ accuracy, G4: result.G4 }, null, 2));
+console.log(JSON.stringify({ accuracy, G4: "G4" in result ? result.G4 : undefined }, null, 2));
 for (const r of rows.filter((x) => !x.correct)) console.log(r.arm, r.i, JSON.stringify(r.prompt), "expected", r.expect, "got", r.picked, r.note ?? "");
 console.log(`wrote ${file}`);
