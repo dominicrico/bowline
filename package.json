@@ -6,9 +6,10 @@
     "typecheck": "tsc -p tsconfig.json",
     "test": "node --test \"packages/*/src/**/*.test.ts\" \"examples/*/src/**/*.test.ts\"",
     "demo": "node examples/billing/src/main.ts",
-    "count-tier1": "node --env-file=.env scripts/count-tier1.ts"
+    "bench-idle": "node --env-file=.env scripts/bench-idle.ts"
   },
   "devDependencies": {
+    "@bowline/bridges": "workspace:*",
     "@bowline/client": "workspace:*",
     "@bowline/server": "workspace:*",
     "@types/node": "^26.6.5",

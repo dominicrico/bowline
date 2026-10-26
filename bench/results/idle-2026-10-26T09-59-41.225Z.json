@@ -1,0 +1,27 @@
+{
+  "catalog": "C1",
+  "capabilities": 25,
+  "model": "claude-opus-5-5",
+  "date": "2026-10-26T09:59:41.225Z",
+  "client": "raw fetch, anthropic-version 2023-06-01",
+  "baseline": 11,
+  "idle": {
+    "B1": {
+      "total": 601,
+      "idle": 590
+    },
+    "M1": {
+      "total": 3600,
+      "idle": 3589
+    },
+    "M2": {
+      "total": 654,
+      "countTokens": 654,
+      "idle": 643
+    }
+  },
+  "ratios": {
+    "M1/B1": 6.083050847457627,
+    "M2/B1": 1.0898305084745763
+  }
+}

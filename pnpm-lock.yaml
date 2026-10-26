@@ -8,6 +8,9 @@ importers:
 
   .:
     devDependencies:
+      '@bowline/bridges':
+        specifier: workspace:*
+        version: link:packages/bridges
       '@bowline/client':
         specifier: workspace:*
         version: link:packages/client
@@ -29,6 +32,12 @@ importers:
       '@bowline/spec-types':
         specifier: workspace:*
         version: link:../../packages/spec-types
+
+  packages/bridges:
+    dependencies:
+      '@bowline/spec-types':
+        specifier: workspace:*
+        version: link:../spec-types
 
   packages/client:
     dependencies:
