@@ -4,6 +4,7 @@
   "private": true,
   "type": "module",
   "dependencies": {
-    "@bowline/server": "workspace:*"
+    "@bowline/server": "workspace:*",
+    "@bowline/spec-types": "workspace:*"
   }
 }

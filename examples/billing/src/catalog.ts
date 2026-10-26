@@ -1,35 +1,81 @@
-import type { DiscoveryDef } from "@bowline/server";
+import type { CapabilityDef, DiscoveryDef, GroupDef } from "@bowline/server";
 
-const cap = (id: string, summary: string, sig: string, effect: "read" | "write" | "destructive" | "external", scope: string) => ({
-  id, version: "1.0.0", summary, sig, effect, idempotent: effect === "read", scopes: [scope], async: "never" as const,
-});
+type Effect = CapabilityDef["effect"];
 
-/** Fictional billing service from SPEC.md. Only the groups the v0.2 idle-cost check needs. */
+// [name, summary, sig, effect, idempotent, async]. The id is `<group>.<name>`; the scope follows from the effect.
+type Row = [string, string, string, Effect, boolean, CapabilityDef["async"]?];
+
+function group(name: string, summary: string, types: Record<string, string>, rows: Row[]): GroupDef {
+  return {
+    name,
+    summary,
+    types,
+    capabilities: rows.map(([n, s, sig, effect, idempotent, async = "never"]) => ({
+      id: `${name}.${n}`,
+      version: "1.0.0",
+      summary: s,
+      sig,
+      effect,
+      idempotent,
+      scopes: [`${name}:${effect === "read" || effect === "write" ? effect : n.toLowerCase()}`],
+      async,
+      ...(effect === "destructive" || effect === "external" ? { stepUp: "required" as const } : {}),
+    })),
+  };
+}
+
+const MONEY = "{ amount: string, currency: string }";
+
+/** The fictional billing service from SPEC.md at the protocol's 25-capability scale point (5 groups of 5). */
 export const catalog: DiscoveryDef = {
   server: { name: "Example Billing", publisher: "did:web:billing.example.com", base: "https://billing.example.com/bowline/v1" },
   auth: { issuer: "https://auth.example.com", metadata: "https://auth.example.com/.well-known/oauth-authorization-server", dpop: "required" },
   groups: [
-    {
-      name: "customers",
-      summary: "Look up and update customer records",
-      capabilities: [
-        cap("customers.get", "Fetch one customer by id", "get(customerId: id): Customer", "read", "customers:read"),
-        cap("customers.update", "Change a customer's name or billing email", "update(customerId: id, name?: string, billingEmail?: email): Customer", "write", "customers:write"),
+    group("customers", "Look up and update customer records", { Money: MONEY, Customer: "{ customerId: id, name: string, billingEmail: email, openBalance: Money }" }, [
+      ["get", "Fetch one customer by id", "get(customerId: id): Customer", "read", true],
+      ["find", "Find customers by billing email or name", "find(email?: email, name?: string): Customer[]", "read", true],
+      ["create", "Create a customer record", "create(name: string, billingEmail: email, currency = \"EUR\"): Customer", "write", false],
+      ["update", "Change a customer's name or billing email", "update(customerId: id, name?: string, billingEmail?: email): Customer", "write", true],
+      ["delete", "Permanently delete a customer with no open invoices", "delete(customerId: id): { customerId: id, deleted: bool }", "destructive", true],
+    ]),
+    group(
+      "invoices",
+      "Create, send, void and query invoices",
+      {
+        Money: MONEY,
+        Line: "{ description: string[1..500], quantity: int, unitPrice: number }",
+        Invoice: "{ invoiceId: id, customerId: id, status: \"draft\" | \"open\" | \"paid\" | \"void\", total: Money, lines: Line[] }",
+        Receipt: "{ receiptId: id }",
+        SendResult: "{ invoiceId: id, sentTo: email, sentAt: datetime, receipt: Receipt }",
+      },
+      [
+        ["create", "Create a draft invoice for a customer", "create(customerId: id, lines: Line[1..100], dueDate?: date, currency = \"EUR\"): Invoice", "write", false],
+        ["get", "Fetch one invoice by id", "get(invoiceId: id): Invoice", "read", true],
+        ["list", "List invoices, optionally by customer or status", "list(customerId?: id, status?: \"draft\" | \"open\" | \"paid\" | \"void\", limit = 50): Invoice[]", "read", true],
+        ["send", "Email a finalized invoice to the customer's billing contact", "send(invoiceId: id, message?: string[..500]): SendResult", "external", false],
+        ["void", "Void an unpaid invoice", "void(invoiceId: id): Invoice", "destructive", true],
       ],
-    },
-    {
-      name: "invoices",
-      summary: "Create, send, void and query invoices",
-      capabilities: [
-        cap("invoices.get", "Fetch one invoice by id", "get(invoiceId: id): Invoice", "read", "invoices:read"),
-        cap("invoices.send", "Email a finalized invoice to the customer's billing contact", "send(invoiceId: id, message?: string[..500]): SendResult", "external", "invoices:send"),
-        cap("invoices.void", "Void an unpaid invoice", "void(invoiceId: id): Invoice", "destructive", "invoices:void"),
-      ],
-    },
-    {
-      name: "reports",
-      summary: "Generate revenue and aging reports (async)",
-      capabilities: [cap("reports.revenue", "Generate a revenue report for a date range", "revenue(from: date, to: date): Report", "read", "reports:read")],
-    },
+    ),
+    group("payments", "Record, query and refund payments", { Money: MONEY, Payment: "{ paymentId: id, invoiceId: id, amount: Money, receivedAt: datetime }" }, [
+      ["record", "Record a payment received against an invoice", "record(invoiceId: id, amount: number, receivedAt?: datetime): Payment", "write", false],
+      ["get", "Fetch one payment by id", "get(paymentId: id): Payment", "read", true],
+      ["list", "List payments, optionally by invoice", "list(invoiceId?: id, limit = 50): Payment[]", "read", true],
+      ["refund", "Refund a payment to the customer's original payment method", "refund(paymentId: id, amount?: number): Payment", "external", false],
+      ["reconcile", "Match a bank transaction to a recorded payment", "reconcile(paymentId: id, bankTransactionId: id): Payment", "write", true],
+    ]),
+    group("subscriptions", "Manage recurring plans and their billing", { Subscription: "{ subscriptionId: id, customerId: id, plan: string, status: \"active\" | \"paused\" | \"canceled\", renewsOn?: date }" }, [
+      ["create", "Start a subscription on a plan", "create(customerId: id, plan: string, startsOn?: date): Subscription", "write", false],
+      ["get", "Fetch one subscription by id", "get(subscriptionId: id): Subscription", "read", true],
+      ["changePlan", "Switch a subscription to another plan, prorated", "changePlan(subscriptionId: id, plan: string): Subscription", "write", true],
+      ["pause", "Pause billing until a resume date", "pause(subscriptionId: id, resumeOn?: date): Subscription", "write", true],
+      ["cancel", "Cancel a subscription at the end of the period", "cancel(subscriptionId: id): Subscription", "destructive", true],
+    ]),
+    group("reports", "Generate revenue and aging reports (async)", { Report: "{ reportId: id, kind: string, status: \"running\" | \"ready\" | \"failed\", url?: string }" }, [
+      ["revenue", "Generate a revenue report for a date range", "revenue(from: date, to: date): Report", "read", true, "always"],
+      ["aging", "Generate an accounts receivable aging report", "aging(asOf?: date): Report", "read", true, "always"],
+      ["taxSummary", "Generate a tax summary for a quarter", "taxSummary(year: int, quarter: int): Report", "read", true, "always"],
+      ["get", "Fetch a generated report by id", "get(reportId: id): Report", "read", true],
+      ["list", "List recently generated reports", "list(limit = 20): Report[]", "read", true],
+    ]),
   ],
 };

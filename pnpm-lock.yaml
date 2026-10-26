@@ -26,6 +26,9 @@ importers:
       '@bowline/server':
         specifier: workspace:*
         version: link:../../packages/server
+      '@bowline/spec-types':
+        specifier: workspace:*
+        version: link:../../packages/spec-types
 
   packages/client:
     dependencies:
