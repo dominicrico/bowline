@@ -44,7 +44,17 @@ Fields are additive. Servers without digests keep working, and clients then fall
 
 ## Reference implementation
 
-In this repository: digest and canonical JSON (`packages/spec-types/src/digest.ts`), verification, pinning and field-level diff (`packages/client/src/discovery.ts`), and the scenario above. These use Bowline's group documents, not MCP tool objects. A prototype against the TypeScript SDK is still to be written and is required before acceptance.
+`packages/mcp-pinning` is a prototype against the unmodified TypeScript SDK 1.32.1. It has no SDK dependency and works on the tool objects and `tools/list` results the SDK produces.
+
+- **Server side:** `signedToolsResult()` adds a digest to each tool and a detached EdDSA JWS over the sorted `name@digest` list.
+- **Client side:** `guardTools()` checks the list signature (when the user trusts a publisher key), then each tool's digest, then the user's pins (`ToolPins`). Only pinned tools are exposed. Changed tools come back with a field-level diff and an effect-downgrade flag.
+- **Evidence:** `scripts/scenario-tamper.ts` runs the four attacks over the real SDK with the prototype on. All four are stopped, and an honest publisher is never withheld (25 of 25 tools exposed). Result: `bench/results/tamper-*.json`, column `mcpPrototype`.
+
+Two findings from building it:
+1. The SDK's `ToolSchema` drops unknown top-level fields on the client. The prototype therefore carries the digest in the tool's `_meta` and the signature in the result's `_meta`. A final SEP must either use `_meta` or extend the schema.
+2. Rows 1 and 2 use the publisher's own key, so the signature is valid. Only pinning stops a publisher who ships a bad update. The signature adds protection against intermediaries and lets a user trust a publisher by key.
+
+Still to do before acceptance: a conformance scenario, publisher key discovery, and a pass over how this interacts with `ttlMs` and `cacheScope`. Bowline's own group-document version of the same checks stays in `packages/client/src/discovery.ts`.
 
 ## Security implications
 
