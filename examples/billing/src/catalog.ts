@@ -79,3 +79,38 @@ export const catalog: DiscoveryDef = {
     ]),
   ],
 };
+
+// [plural, singular, one-line purpose]. Synthetic: names and summaries come from one template, so they are
+// more regular than a real API (protocol, C1 known limitation).
+const NOUNS: [string, string, string][] = [
+  ["orders", "order", "customer orders"],
+  ["products", "product", "the product catalog"],
+  ["shipments", "shipment", "outbound shipments"],
+  ["vendors", "vendor", "supplier records"],
+  ["expenses", "expense", "employee expenses"],
+  ["budgets", "budget", "department budgets"],
+  ["contracts", "contract", "customer contracts"],
+  ["quotes", "quote", "sales quotes"],
+  ["credits", "credit", "credit notes"],
+  ["taxes", "tax", "tax rates and filings"],
+  ["ledgers", "ledger", "general ledger entries"],
+  ["payouts", "payout", "vendor payouts"],
+  ["disputes", "dispute", "payment disputes"],
+  ["coupons", "coupon", "discount coupons"],
+  ["wallets", "wallet", "prepaid customer wallets"],
+];
+
+function templated([plural, one, purpose]: [string, string, string]): GroupDef {
+  const T = one[0]!.toUpperCase() + one.slice(1);
+  const id = `${one}Id`;
+  return group(plural, `Create, query and update ${purpose}`, { [T]: `{ ${id}: id, name: string, status: "active" | "archived" }` }, [
+    ["get", `Fetch one ${one} by id`, `get(${id}: id): ${T}`, "read", true],
+    ["list", `List ${plural}, optionally by status`, `list(status?: "active" | "archived", limit = 50): ${T}[]`, "read", true],
+    ["create", `Create a ${one}`, `create(name: string): ${T}`, "write", false],
+    ["update", `Rename a ${one} or change its status`, `update(${id}: id, name?: string, status?: "active" | "archived"): ${T}`, "write", true],
+    ["delete", `Permanently delete a ${one}`, `delete(${id}: id): { ${id}: id, deleted: bool }`, "destructive", true],
+  ]);
+}
+
+/** The protocol's 100-capability scale point: the billing service plus 15 templated groups. */
+export const catalog100: DiscoveryDef = { ...catalog, groups: [...catalog.groups, ...NOUNS.map(templated)] };
